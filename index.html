@@ -1,0 +1,95 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<title>Open Directory Finder</title>
+</head>
+<body>
+	<div class="container" align="center">
+	<h1>Open Directory Finder</h1>
+	</div>
+	<script>
+	function find(){
+		var format=document.getElementById("select").value;
+		var query=document.getElementById("input").value;
+		var arr=new Array();
+	    var commonToAll=" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) -inurl:(index_of|listen77|mp3raid|mp3toss|mp3drug|index_of|wallywashis) intitle:\"index.of./\" ";
+	    if(query[query.length-1]==','){
+		      query=query.slice(0,-1)
+		    }
+
+		arr=query.split(',');
+    	arr.push(',');
+		switch(format){
+		      case("video"):{
+		        var extensions=" (avi|mkv|mov|mp4|mpg|wmv)";
+		        break;
+		      }
+		      case("audio"):{
+		        var extensions=" (ac3|flac|m4a|mp3|ogg|wav|wma) ";
+		        break;
+		      }
+		      case("ebook"):{
+		        var extensions=" (CBZ|CBR|CHM|DOC|DOCX|EPUB|MOBI|ODT|PDF|RTF|txt)";
+		        break;
+		      }
+		      case("pics"):{
+		        var extensions=" (bmp|gif|jpg|png|psd|tif|tiff) ";
+		        break;
+		      }
+		      case("soft"):{
+		        var extensions=" (apk|exe|iso|rar|tar|zip) ";
+		        break;
+		      }
+		      case("compressed"):{
+		        var extensions=" (7z|bz2|gz|iso|rar|zip) ";
+		        break;
+		      }
+		      default:{
+		        var extensions=" (avi|mkv|mov|mp4|mpg|wmv)";
+		        break;
+		      }
+		    }
+		    for (var i =0 ; i <arr.length - 1; i++) {
+		      if(arr[i]!=""){
+		        var temp=arr[i];
+		        var last;
+		        temp=temp.replace(/[^\w\s]/gi, '');
+		        if(temp!=0){
+		          last=temp.replace(/ /g,".");
+		        }
+		        var goodinput="intext:\""+last+"\"";
+		        var finalquery=goodinput+extensions+commonToAll;
+
+		        var url="https://www.google.com/search?q="+encodeURIComponent(finalquery);
+		        //alert(goodinput);
+		        window.open(url,'_blank');
+		      }
+
+		    }
+
+
+
+	}
+
+	</script>
+
+
+<div class="container" align="center" style="padding:2%">
+	 <select id="select">
+	  <option value="video">Video</option>
+	  <option value="audio">Audio</option>
+	  <option value="pics">Pictures</option>
+	  <option value="ebook">E Books</option>
+	  <option value="soft">Softwares/Games</option>
+	  <option value="compressed">Compressed</option>
+	</select> 
+	<input id="input" type="text" placeholder="input">
+	 <button id="button" type="button" onclick="find()">Go!</button> 
+</div>
+
+
+
+
+</body>
+</html> 
