@@ -10,18 +10,19 @@
 	</div>
 	<script>
 	function find(){
-		var format=document.getElementById("select").value;
-		var query=document.getElementById("input").value;
+		var format=document.getElementById("select").value;   //File format of the search item
+		var query=document.getElementById("input").value;     //The actual search Term
 		var arr=new Array();
-	    var commonToAll=" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) -inurl:(index_of|listen77|mp3raid|mp3toss|mp3drug|index_of|wallywashis) intitle:\"index.of./\" ";
+	    var commonToAll=" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml) -inurl:(index_of|listen77|mp3raid|mp3toss|mp3drug|index_of|wallywashis) intitle:\"index.of./\" "; //The commands  common to every search term
 	    if(query[query.length-1]==','){
 		      query=query.slice(0,-1)
 		    }
 
 		arr=query.split(',');
     	arr.push(',');
+		// Assignment of Extensions according to the file format of search query
 		switch(format){
-		      case("video"):{
+		      case("video"):{ 
 		        var extensions=" (avi|mkv|mov|mp4|mpg|wmv)";
 		        break;
 		      }
@@ -61,9 +62,8 @@
 		        var goodinput="intext:\""+last+"\"";
 		        var finalquery=goodinput+extensions+commonToAll;
 
-		        var url="https://www.google.com/search?q="+encodeURIComponent(finalquery);
-		        //alert(goodinput);
-		        window.open(url,'_blank');
+		        var url="https://www.google.com/search?q="+encodeURIComponent(finalquery);// the final url 
+		        window.open(url,'_blank'); // This will open in new tab
 		      }
 
 		    }
